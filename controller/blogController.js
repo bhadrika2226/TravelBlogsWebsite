@@ -18,9 +18,6 @@ exports.createBlog=async (req, res) => {
   }
 };
 
-// module.exports = router;
-
-
 // Retrieve all blog posts
 exports.retrieveAllBlog= async (req, res) => {
   try {

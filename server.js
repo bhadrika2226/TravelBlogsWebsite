@@ -37,7 +37,7 @@ app.listen(PORT, () => {
     console.log(`Server started at http://localhost:${PORT}`);
 });
 
-
+//DATABASE CONNECTION
 const dbUrl = process.env.DB_URI;
 
 const connectionParams = {
