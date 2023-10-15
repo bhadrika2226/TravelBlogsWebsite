@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const Blog = require('../models/blogs'); // Import the Blog model
+const Blog = require('../models/blogModel'); // Import the Blog model
 
 // Create a new blog post
 exports.createBlog=async (req, res) => {
