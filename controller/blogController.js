@@ -5,11 +5,15 @@ const Blog = require('../models/blogModel'); // Import the Blog model
 // Create a new blog post
 exports.createBlog=async (req, res) => {
   try {
-    const { title, content, blogImg } = req.body;
+    const {bState,bCity,title, content,tag,date,bImg } = req.body;
     const newBlog = new Blog({
+      bState,
+      bCity,
       title,
       content,
-      blogImg,
+      tag,
+      date,
+      bImg,
     });
     const savedBlog = await newBlog.save();
     res.json(savedBlog);

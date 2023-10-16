@@ -1,5 +1,20 @@
-const mongoose = require('mongoose');
 const blogSchema = new mongoose.Schema({
+    // blogId: {
+    //     type: Number,
+    //     unique: true
+    // },
+    userId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User'
+    },
+    bState: {
+        type: String,
+        required: true
+    },
+    bCity: {
+        type: String,
+        required: true
+    },
     title: {
         type: String,
         required: true
@@ -8,15 +23,18 @@ const blogSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    postDate: {
-        type: Date,
-        required: true,
-        default: Date.now
+    tag: {
+        type: [String],
+        required: true
     },
-    blogImg: {
+    date: {
+        type: date,
+        require: true
+    },
+    bImg: {
         type: String,
         required: true
-    }
-})
-
-module.exports = mongoose.model('Blogs',blogSchema);
+    },
+});
+const Blog = mongoose.model('Blog', blogSchema);
+module.exports = Blog;
