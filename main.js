@@ -17,7 +17,7 @@ app.listen(PORT, () => {
 
 // const mongoose = require("mongoose")
 
-const dbUrl = "mongodb+srv://urja:1234@cluster0.er9az50.mongodb.net/?retryWrites=true&w=majority"
+const dbUrl = "mongodb+srv://pratiksha:1812@cluster0.er9az50.mongodb.net/?retryWrites=true&w=majority"
 
 const connectionParams = {
   useNewUrlParser: true,
