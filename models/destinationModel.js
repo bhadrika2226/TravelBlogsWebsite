@@ -1,3 +1,4 @@
+const mongoose = require('mongoose');
 const destinationSchema = new mongoose.Schema({
     // destinationId: {
     //     type: Number,

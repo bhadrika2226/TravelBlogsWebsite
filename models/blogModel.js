@@ -1,3 +1,4 @@
+const mongoose = require('mongoose');
 const blogSchema = new mongoose.Schema({
     // blogId: {
     //     type: Number,
@@ -28,7 +29,7 @@ const blogSchema = new mongoose.Schema({
         required: true
     },
     date: {
-        type: date,
+        type: Date,
         require: true
     },
     bImg: {
