@@ -11,7 +11,6 @@ router.get('/deleteBlogId/:id', deleteBlogId);
 
 router.patch('/retrieveAllBlog' ,retrieveAllBlog);
 
-
 router.delete('/retrieveBlogId/:id', retrieveBlogbyId);
 
 module.exports = router;

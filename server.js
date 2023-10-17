@@ -8,10 +8,6 @@ const mongoose = require('mongoose');
 // const app = express();
 const PORT = process.env.PORT || 4000;
 
-// //middlewares
-// app.use(express.urlencoded({extended:false}));
-// app.use(express.json());
-
 // app.use(session({
 //   secret: 'my secrte key',
 //   saveUninitialized: true,
@@ -36,6 +32,7 @@ const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => {
     console.log(`Server started at http://localhost:${PORT}`);
 });
+
 
 //DATABASE CONNECTION
 const dbUrl = process.env.DB_URI;
