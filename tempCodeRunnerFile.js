@@ -49,10 +49,9 @@ app.post('/post-blog', upload.single('image'), (req, res) => {
     console.log('req.file:', req.file);
 
     // Access form data
-    const title = req.body.title;
+   
     const state = req.body.state;
     const city = req.body.city;
-    const d = req.body.d;
     const description = req.body.description;
     const imageUrl = req.file.path; // URL of the uploaded image
 
