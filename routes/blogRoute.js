@@ -1,17 +1,15 @@
 const express = require('express');
 const router = express.Router();
-const {createBlog, updateBlog,deleteBlogId,retrieveAllBlog, retrieveBlogbyId} = require('../controller/blogController'); // Import the blog controller
+const blogController = require('../controllers/blogController');
 
+// Routes for managing blog posts
+router.post('/blogs', blogController.createBlog);
+router.get('/blogs', blogController.getAllBlogs);
+router.get('/blogs/:id', blogController.getBlogById);
+router.put('/blogs/:id', blogController.updateBlog);
+router.delete('/blogs/:id', blogController.deleteBlog);
 
-router.post('/createBlog', createBlog);
-
-router.get('/updateBlog/:id', updateBlog);
-
-router.get('/deleteBlogId/:id', deleteBlogId);
-
-router.patch('/retrieveAllBlog' ,retrieveAllBlog);
-
-
-router.delete('/retrieveBlogId/:id', retrieveBlogbyId);
+// Route for liking a blog post
+router.post('/blogs/:id/like', blogController.likeBlog);
 
 module.exports = router;
