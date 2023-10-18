@@ -1,40 +1,25 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const form = document.getElementById('registrationForm'); // Replace with your form's actual ID
+document.addEventListener('DOMContentLoaded', function() {
+    // Attach an event listener to a button or form submit, which triggers the fetch request
+    const submitButton = document.getElementById('loginSubmit');
+    submitButton.addEventListener('click', function(event) {
+        event.preventDefault(); // Prevent form submission, if using a form
 
-    form.addEventListener('submit', (event) => {
-        event.preventDefault();
-
-        // Get form data
-        const formData = new FormData(form);
-        const data = {};
-
-        formData.forEach((value, key) => {
-            data[key] = value;
-        });
-
-        // Send a POST request to the server
-        fetch('/register', {
-            method: 'POST',
+        fetch('http://localhost:5000/register', {
+            method: 'GET',
+            mode: 'cors',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify(data),
         })
-        .then((response) => {
-            console.log(response.status);
-            if (!response.ok) {
-                
-                throw new Error('Network response was not ok');
-            }
-            return response.json();
+        .then(response => response.json())
+        .then(data => {
+            // Handle the response data
+            console.log(data); // You can replace this with your handling logic
         })
-        .then((result) => {
-            // Handle the response from the server
-            console.log(result);
-        })
-        .catch((error) => {
+        .catch(error => {
             // Handle errors
-            console.error('There was a problem with the fetch operation:', error);
+            console.error(error); // You can replace this with your error handling logic
         });
     });
 });
+

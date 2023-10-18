@@ -9,8 +9,8 @@ app.use(express.urlencoded({extended:true}));
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(express.json());
 
-app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'user_login.html'));
+app.get('/register', (req, res) => {
+    res.sendFile(path.join(__dirname, '/user_login.html'));
 });
 const blog= require("./routes/blogRoute");
 const user = require("./routes/userRoute");
