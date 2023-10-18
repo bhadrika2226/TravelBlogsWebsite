@@ -14,7 +14,8 @@ const destinationSchema = new mongoose.Schema({
     },
     location: {
         type: String,
-        required: true
+        required: true,
+        
     },
     details: {
         type: String,
