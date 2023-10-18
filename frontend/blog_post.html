@@ -76,7 +76,7 @@
 <body>
     <div class="container">
         <h2>Input the required fields to post a blog</h2>
-        <form action="" method="post">
+        <form action="/post-blog" method="POST" enctype="multipart/form-data">
             <div class="input-group">
                 <label for="title">Title for your Blog</label>
                 <input type="text" id="title" name="title" required>
@@ -85,7 +85,7 @@
 
             <div class="input-group">
                 <label for="state">Select a State</label>
-                <select id="state" onchange="updateCities()" required>
+                <select id="state" name="state" onchange="updateCities()" required>
                     <option value="Andhra Pradesh">Andhra Pradesh</option>
                     <option value="Arunachal Pradesh">Arunachal Pradesh</option>
                     <option value="Assam">Assam</option>
@@ -118,7 +118,7 @@
                  
                 <div class="input-group">
                     <label for="city">Select a City:</label>
-                    <select id="city" required  ></select>
+                    <select id="city" name="city" required  ></select>
                 </div>
                
                 <script>
@@ -178,20 +178,48 @@
                
      <label for="blog_img">Select an image for your blog:</label>
                  <div class="img_post">
-                    <form action="/upload" method="POST" enctype="multipart/form-data">
-                        <input type="file" name="image" accept="image/*">
+                  
+                        <input type="file" id="image" name="image" accept="image/*">
                         <button type="submit" class="btn">Upload</button> 
-                      </form>
+                     
                  </div>
 
                  <div class="input-group">
                     <label for="desc">Description : </label>
-                    <textarea name="" id="desc" cols="90" rows="30" required></textarea>
+                    <textarea name="desc" id="desc" cols="90" rows="30" required></textarea>
                 </div>
               
-                <button type="submit" class="btn">Submit</button> 
+                <button type="submit" id ="submit" class="btn">Submit</button> 
             </div>
         </form>
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Attach an event listener to a button or form submit, which triggers the fetch request
+            const submitButton = document.getElementById('submit');
+            submitButton.addEventListener('click', function(event) {
+                event.preventDefault(); // Prevent form submission, if using a form
+
+                fetch('http://localhost:4000/post-blog', {
+                    method: 'GET',
+                    mode: 'cors',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                })
+                .then(response => response.json())
+                .then(data => {
+                    // Handle the response data
+                    console.log(data); // You can replace this with your handling logic
+                })
+                .catch(error => {
+                    // Handle errors
+                    console.error(error); // You can replace this with your error handling logic
+                });
+            });
+        });
+    </script>
+
 </body>
 </html>

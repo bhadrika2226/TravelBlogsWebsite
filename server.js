@@ -10,6 +10,8 @@ const { CloudinaryStorage } = require('multer-storage-cloudinary');
 const bodyParser = require('body-parser');
 const path = require('path');
 
+// ...
+
 const app = express();
 
 cloudinary.config({ 
@@ -31,22 +33,34 @@ const storage = new CloudinaryStorage({
 const upload = multer({ storage: storage });
 
 // Serve static files (e.g., images)
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'frontend')));
 
 // Parse form data
 app.use(bodyParser.urlencoded({ extended: false }));
 
+
 // Render the HTML form
-app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'blog_post.html'));
+app.get('/post-blog', (req, res) => {
+  res.sendFile(path.join(__dirname, 'frontend/blog_post.html'));
 });
 
-// Handle form submission
-// Handle form submission
+
+
+const blogSchema = new mongoose.Schema({
+  title: String,
+  state: String,
+  city: String,
+  description: String,
+  image : String,
+  d: Date,
+});
+
+const Blog = mongoose.model('Blog', blogSchema);
 app.post('/post-blog', upload.single('image'), (req, res) => {
     // Access form data
     console.log('req.body:', req.body);
     console.log('req.file:', req.file);
+
 
     // Access form data
     const title = req.body.title;
@@ -56,13 +70,32 @@ app.post('/post-blog', upload.single('image'), (req, res) => {
     const description = req.body.description;
     const imageUrl = req.file.path; // URL of the uploaded image
 
+
+    const newBlog = new Blog({
+      title: title,
+      d: d,
+      // Add other fields as needed
+    });
+  
+    // Save the newBlog instance to MongoDB
+    newBlog.save()
+      .then((result) => {
+        console.log('Blog post saved to MongoDB:', result);
+        res.send('Blog post saved to MongoDB');
+      })
+      .catch((error) => {
+        console.error('Error saving blog post:', error);
+        res.status(500).send('Error saving blog post');
+      });
+  
+  
+
     // Debugging - Check the value of imageUrl
     console.log('Image URL:', imageUrl);
 
 
     // You can save this data to a database or process it as needed
     // For now, we'll just send it back as a response
-    res.send(`Name: ${name}<br>Email: ${email}<br>Password: ${password}<br>State: ${state}<br>City: ${city}<br>Description: ${description}<br>Image URL: ${imageUrl}`);
 });
 
 

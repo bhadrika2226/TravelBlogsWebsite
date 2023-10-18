@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <title>Travel Blogs</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 200px; /* Horizontal gap */
+    row-gap: 100px; /* Vertical gap */
+    padding: 20px;
+}
+
+
+        .card {
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+        span i{
+            color: #950740;
+        }
+        /* .card img {
+            max-width: 100%;
+            height: auto;
+        } */
+
+        .card-content {
+            padding: 20px;
+        } 
+
+        .card img{
+           width: 500px;
+           height: 500px;
+        }
+
+        .card-like {
+            color: red;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+      
+        <div class="card">
+            <img src="blog_img1.jpg" alt="Blog 1">
+            <div class="card-content">
+                <h3>The Many Moods of Mt. Fishtail: Witnessing Beauty at Pokhara</h3>
+                <p>Posted on January 3, 2021  <br>
+                    Most visitors to Pokhara stop here before starting or after finishing the "Round Annapurana" trekking route. Because of its popularity with travellers, the city itself has relatively modern hotels and restaurants, but you’ll also find ancient lakes, waterfalls and gorges, and, of course, majestic views of the Himalayan Mountains.</p>
+                <span class="card-like" onclick="toggleLike(1)"><i class="fa-regular fa-thumbs-up"></i></span>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="blog_img2.jpg" alt="Blog 2">
+            <div class="card-content">
+                <h3>Jaipur Metro: A Guide to the Pink City’s Rapid Transit System</h3>
+                <p>Posted on July 29, 2023 <br>
+                    I love traveling by the metro train in any city where I can. Chhavi and I have been visiting Jaipur frequently for her tennis tournaments. We stay at Ibis Jaipur which is right next to the civil lines metro station. I now regularly use the Jaipur Metro, particularly to go to the old city as…</p>
+                <span class="card-like" onclick="toggleLike(2)"><i class="fa-regular fa-thumbs-up"></i></span>
+            </div>
+        </div>
+        <div class="card">
+            <img src="blog_img3.jpg" alt="Blog 3">
+            <div class="card-content">
+                <h3>Umaid Bhawan Palace, Jodhpur</h3>
+                <p>Posted on June 5, 2022  <br>
+                    The last of India’s grand palaces in the desert capital, Umaid Bhawan Palace in Jodhpur is home to dancing peacocks in its acreage, and features the same palm court marble that was used in the construction of the Taj Mahal.</p>
+                <span class="card-like" onclick="toggleLike(3)"><i class="fa-regular fa-thumbs-up"></i></span>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="blog_img4.png" alt="Blog 4">
+            <div class="card-content">
+                <h3>6 Best Places To Visit In Pathanamthitta</h3>
+                <p>Nestled in the heart of Kerala, Pathanamthitta is a hidden gem waiting to be explored by avid travelers and nature enthusiasts. This picturesque district, blessed with a rich cultural heritage and breathtaking natural beauty, offers a diverse range of attractions that cater to the interests of every visitor. From ancient temples and tranquil backwaters to lush forests and scenic hill stations, places to visit in Pathanamthitta promise an unforgettable journey through the heart of Kerala. Let’s dive and check out all the amazing attractions you can explore on your next trip to this picturesque town.</p>
+                <span class="card-like" onclick="toggleLike(4)"><i class="fa-regular fa-thumbs-up"></i></span>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // JavaScript to handle "like" functionality
+        const likes = {};
+
+        function toggleLike(blogId) {
+            if (likes[blogId]) {
+                likes[blogId] = false;
+            } else {
+                likes[blogId] = true;
+            }
+
+            updateLikes();
+        }
+
+        function updateLikes() {
+            const likeElements = document.querySelectorAll('.card-like');
+            likeElements.forEach((likeElement, index) => {
+                if (likes[index + 1]) {
+                    likeElement.style.color = 'red';
+                } else {
+                    likeElement.style.color = 'black';
+                }
+            });
+        }
+    </script>
+</body>
+</html>
