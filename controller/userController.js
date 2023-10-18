@@ -36,6 +36,10 @@ router.login=async (req, res) => {
     }
     // You can generate and send a JWT (JSON Web Token) here for user authentication.
     // For simplicity, it's not included in this example.
+    const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET_KEY, {
+      expiresIn: '2h', // Token expiration time (adjust as needed)
+    });
+
     res.json({ message: 'Login successful' });
   } catch (err) {
     res.status(400).json({ error: err.message });
