@@ -76,7 +76,7 @@ h2 {
     <div class="container">
         <h2> Sign Up</h2>
 
-        <form action="/register" method="POST" id="registrationForm">
+        <form  method="POST" id="registrationForm">
 
             <div class="input-group">
                 <label for="fullName">Name</label>
@@ -113,38 +113,31 @@ h2 {
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-    // Attach an event listener to a button or form submit, which triggers the fetch request
-    const submitButton = document.getElementById('loginSubmit');
-    submitButton.addEventListener('click', function(event) {
-        event.preventDefault(); // Prevent form submission, if using a form
-        const data ={
-            userName: document.getElementById('userName'), 
-            password: document.getElementById('password'), 
-            fullName: document.getElementById('fullName'), 
-            email: document.getElementById('email')
-        }
-        fetch('http://localhost:5000/register', {
-            method: 'POST',
-            mode: 'cors',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body:JSON.stringify(data),
-
-        })
-        .then(response => response.json())
-        .then(data => {
-            // Handle the response data
-            console.log(data); // You can replace this with your handling logic
-        })
-        .catch(error => {
-            // Handle errors
-            console.error(error); // You can replace this with your error handling logic
+            // Attach an event listener to the form submit
+            const registrationForm = document.getElementById('registrationForm');
+    
+            registrationForm.addEventListener('submit', function(event) {
+                event.preventDefault(); // Prevent form submission
+    
+                const formData = new FormData(registrationForm);
+    
+                fetch('/api/v1/register', {
+                    method: 'POST',
+                    mode: 'cors',
+                    body: formData, // Include the form data in the request
+                })
+                .then(response => response.json())
+                .then(data => {
+                    // Handle the response data
+                    console.log(data); // You can replace this with your handling logic
+                })
+                .catch(error => {
+                    // Handle errors
+                    console.error(error); // You can replace this with your error handling logic
+                });
+            });
         });
-    });
-});
-
-
     </script>
+    
 </body>
 </html>
