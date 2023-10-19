@@ -117,13 +117,20 @@ h2 {
     const submitButton = document.getElementById('loginSubmit');
     submitButton.addEventListener('click', function(event) {
         event.preventDefault(); // Prevent form submission, if using a form
-
+        const data ={
+            userName: document.getElementById('userName'), 
+            password: document.getElementById('password'), 
+            fullName: document.getElementById('fullName'), 
+            email: document.getElementById('email')
+        }
         fetch('http://localhost:5000/register', {
-            method: 'GET',
+            method: 'POST',
             mode: 'cors',
             headers: {
                 'Content-Type': 'application/json',
             },
+            body:JSON.stringify(data),
+
         })
         .then(response => response.json())
         .then(data => {
