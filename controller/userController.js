@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcrypt'); // For hashing passwords
 const User = require('../models/userModel'); // Import the User model
-
+const jwt = require('jsonwebtoken');
 // Create a new user
 router.register=async (req, res) => {
   try {
@@ -15,8 +15,10 @@ router.register=async (req, res) => {
       fullName,
       email,
     });
+    // console.log(newUser);
     const savedUser = await newUser.save();
-    res.json(savedUser);
+    // res.json(savedUser);
+    res.redirect('/success');
   } catch (err) {
     res.status(400).json({ error: err.message });
   }
@@ -39,8 +41,9 @@ router.login=async (req, res) => {
     const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET_KEY, {
       expiresIn: '2h', // Token expiration time (adjust as needed)
     });
-
-    res.json({ message: 'Login successful' });
+    console.log(token);
+   res.json({ message: 'Login successful' });
+    //res.redirect('/success');
   } catch (err) {
     res.status(400).json({ error: err.message });
   }

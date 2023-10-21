@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Travel Website Login</title>
+    <!-- <link rel="stylesheet" href="user_login.css">
+    <script src="user_login.js"></script> -->
+    
+
+    <style>
+        body {
+    font-family: Arial, sans-serif;
+    /* background-image: url(pr_bg.png); */
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    background: white;
+    /* background: #4E4E50; */
+    width: 40%;
+    margin: 20px auto;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    text-align: center;
+     color: #950740;
+}
+
+.input-group {
+    margin: 15px 0;
+    padding: 10px;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 5px;
+    color: #950740;
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+.input-group input {
+    width: 80%;
+    padding: 10px;
+    margin: 5px;
+    border: 1px solid #6F2232;
+    border-radius: 5px;
+}
+
+
+.btn {
+    background: #950740;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background: #950740;
+}
+
+.btn-div{
+    text-align: center;
+}
+
+    </style>
+
+
+</head>
+<body>
+    <div class="container">
+        <h2> Sign Up</h2>
+
+        <form action="api/v1/register" method="POST" id="registrationForm">
+
+            <div class="input-group">
+                <label for="fullName">Name</label>
+                <input type="text" id="fullName" name="fullName" required>
+            </div>
+
+            <div class="input-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+
+            <div class="input-group">
+                <label for="userName">Username</label>
+                <input type="text" id="userName" name="userName" required>
+            </div>
+
+            <div class="input-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+
+            <div class="input-group">
+                <label for="passwordConfirm">Confirm Password</label>
+                <input type="password" id="passwordConfirm" name="passwordConfirm" required>
+            </div>
+
+            <div class="btn-div">
+                <label>Already have an account? <a href="/login">Log in</a></label><br>
+                <button class="btn" type="submit" id="loginSubmit">Register</button>
+            </div>
+           
+        </form>
+    </div>
+
+    <!-- <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Attach an event listener to the form submit
+            const registrationForm = document.getElementById('registrationForm');
+    
+            registrationForm.addEventListener('submit', function(event) {
+                event.preventDefault(); // Prevent form submission
+    
+                const formData = new FormData(registrationForm);
+    
+                fetch('/register', {
+                    method: 'POST',
+                    body: formData, // Include the form data in the request
+                })
+                .then(response => response.json())
+                .then(data => {
+                    // Handle the response data
+                    console.log(data); // You can replace this with your handling logic
+                })
+                .catch(error => {
+                    // Handle errors
+                    console.error(error); // You can replace this with your error handling logic
+                });
+            });
+        });
+    </script> -->
+    
+</body>
+</html>
