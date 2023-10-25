@@ -4,22 +4,11 @@ body {
     /* background-color: #1A1A1D; */
     background-image: url('pr_bg.png');
 }
-/* Add this to your home_style.css file or in a <style> element in your HTML document */
-/* body::before {
-    content: "";
-    background-image: url(home_pr.jpg);
-    backdrop-filter: blur(3px);
-    background-size: cover;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -1; 
-} */
-
-/* Rest of your existing CSS styles */
-
+.logo-container{
+    background-color: #950740;
+    padding: 20px;
+    border-radius: 30px;
+}
 @media screen and (max-width: 768px) {
     .navbar {
         flex-direction: column;
@@ -55,7 +44,6 @@ body {
 .navbar i{
     margin: 10px;
     padding: 10px;
-    /* color: #652232 ; */
     color: #4E4E50;
 }
 
@@ -73,7 +61,6 @@ body {
     font-weight: bold;
      opacity: 0;
     transform: translateY(10px);
-    /* transition: opacity 1.2s ease, transform 1.2s ease; */
     padding-bottom: 3px; 
 }
 
@@ -98,7 +85,6 @@ body {
     align-items: center;
     color: #950740;
     font-size: 2.8rem;
-    font-family: 'Pixelify Sans', cursive;
     font-weight: bold;
 }
 .line-divider {
@@ -117,7 +103,12 @@ h1{
     color: #C3073F;
     text-align: center;
 }
-
+a.link {
+    font-size: 24px; /* You can adjust the font size here */
+    color: white; /* You can change the text color here */
+    font-weight: bold; /* You can make the text bold */
+    text-decoration: none; /* Remove underline */
+}
 .content p{
    color: white;
    font-size: 1.2rem;
