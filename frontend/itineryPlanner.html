@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Indian Itinerary Planner</title>
+    <style>
+         body {
+            background-image: url(pr_bg.png);
+            font-family: Arial, sans-serif;
+            color: white;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            text-align: center;
+            padding: 20px;
+            font-size: 36px;
+            color: #C3073F; /* Header text color */
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        label {
+            font-size: 20px;
+            display: block;
+            margin: 10px 0;
+        }
+
+        select {
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #6F2232; /* Select box border color */
+            border-radius: 5px;
+        }
+
+        button {
+            background-color: #950740; /* Button background color */
+            color: white;
+            font-size: 18px;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        image{
+            width: 200px;
+            height: 200px;
+        }
+        button:hover {
+            background-color: #4e4e50; /* Button background color on hover */
+        }
+
+        #itinerary {
+            margin-top: 20px;
+        }
+
+        .attraction-card {
+            background-color: #6f2232; /* Card background color */
+            color: white;
+            border-radius: 5px;
+            padding: 20px;
+            margin: 10px 0;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s;
+        }
+
+        .attraction-card:hover {
+            transform: scale(1.02); /* Card scale on hover */
+        }
+
+        .attraction-image {
+            max-width: 100%;
+            border-radius: 5px;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* Add fadeIn animation to the attraction cards */
+        .attraction-card {
+            animation: fadeIn 1s ease;
+        }
+    </style>
+</head>
+<body>
+    <h1>Plan Itinerary of Famous Destinations</h1>
+
+    <label for="destination">Select your destination:</label>
+    <select id="destination">
+        <option value="delhi">Delhi, India</option>
+        <option value="mumbai">Mumbai, India</option>
+        <option value="jaipur">Jaipur, India</option>
+        <option value="goa">Goa, India</option>
+        <option value="kolkata">Kolkata, India</option>
+        <option value="chennai">Chennai, India</option>
+        <option value="kerala">Kerala, India</option>
+        <option value="kashmir">Kashmir, India</option>
+       
+
+    </select>
+    
+    <button onclick="generateItinerary()">Generate Itinerary</button>
+
+    <!-- Display Itinerary -->
+    <div id="itinerary">
+        <!-- Attraction cards will be displayed here -->
+    </div>
+
+    <script>
+        // Define attractions data for Indian cities
+        const attractionsData = {
+            delhi: [
+        {
+            day: "Day 1",
+            name: "Qutub Minar",
+            description: "A UNESCO World Heritage Site, the Qutub Minar is a 73-meter-tall minaret made of red sandstone and marble. It's a beautiful example of Indo-Islamic architecture.",
+            image: "qutub-minar.jpg",
+            openingTime: "9:00 AM",
+            closingTime: "6:00 PM",
+        },
+        {
+            day: "Day 1",
+            name: "Lotus Temple",
+            description: "The Lotus Temple is a Bahá'í House of Worship known for its unique lotus-shaped architecture. It's open to people of all faiths for silent meditation and prayer.",
+            image: "lotus-temple.jpg",
+            openingTime: "9:00 AM",
+            closingTime: "7:00 PM",
+        },
+        {
+            day: "Day 2",
+            name: "Red Fort",
+            description: "The Red Fort, a UNESCO World Heritage Site, is an iconic symbol of India's rich history. It served as the main residence of the Mughal emperors for around 200 years.",
+            image: "red-fort.jpg",
+            openingTime: "9:30 AM",
+            closingTime: "4:30 PM",
+        },
+        {
+            day: "Day 2",
+            name: "India Gate",
+            description: "India Gate is a war memorial dedicated to the soldiers who died in World War I. It's a popular spot for picnics and evening strolls.",
+            image: "india-gate.jpg",
+            openingTime: "Open 24 Hours",
+            closingTime: "Open 24 Hours",
+        },
+        {
+            day: "Day 3",
+            name: "Humayun's Tomb",
+            description: "Humayun's Tomb is a magnificent garden tomb and a UNESCO World Heritage Site. It's an architectural marvel and a precursor to the Taj Mahal.",
+            image: "humayuns-tomb.jpg",
+            openingTime: "8:00 AM",
+            closingTime: "6:00 PM",
+        },
+        {
+            day: "Day 3",
+            name: "Akshardham Temple",
+            description: "Akshardham Temple is a grand Hindu temple complex known for its stunning architecture, exhibitions, and the Yagnapurush Kund.",
+            image: "akshardham-temple.jpg",
+            openingTime: "9:30 AM",
+            closingTime: "8:00 PM",
+        },
+        {
+            day: "Day 4",
+            name: "Jama Masjid",
+            description: "Jama Masjid is one of the largest mosques in India, known for its grandeur and the stunning view from its minarets.",
+            image: "jama-masjid.jpg",
+            openingTime: "7:00 AM",
+            closingTime: "12:00 PM, 1:30 PM - 6:30 PM",
+        },
+        {
+            day: "Day 4",
+            name: "Chandni Chowk",
+            description: "Chandni Chowk is a bustling market area in Old Delhi, famous for its street food, spices, and traditional goods.",
+            image: "chandni-chowk.jpg",
+            openingTime: "Varies by shop",
+            closingTime: "Varies by shop",
+        },
+    ],
+    mumbai: [
+        {
+            day: "Day 1",
+            name: "Gateway of India",
+            description: "The Gateway of India is an iconic arch monument built during the 20th century in Bombay, India. It's a popular gathering spot and overlooks the Arabian Sea.",
+            image: "gateway-of-india.jpg",
+            openingTime: "Open 24 Hours",
+            closingTime: "Open 24 Hours",
+        },
+        {
+            day: "Day 1",
+            name: "Elephanta Caves",
+            description: "The Elephanta Caves are a network of sculpted caves featuring rock-cut temples, historical carvings, and scenic views of Mumbai Harbor.",
+            image: "elephanta-caves.jpg",
+            openingTime: "9:00 AM",
+            closingTime: "5:30 PM",
+        },
+        {
+            day: "Day 2",
+            name: "Marine Drive",
+            description: "Marine Drive, also known as the Queen's Necklace, is a picturesque promenade along the Arabian Sea. It's a great place to take a leisurely evening stroll.",
+            image: "marine-drive.jpg",
+            openingTime: "Open 24 Hours",
+            closingTime: "Open 24 Hours",
+        },
+        {
+            day: "Day 2",
+            name: "Chhatrapati Shivaji Terminus",
+            description: "The Chhatrapati Shivaji Terminus, formerly Victoria Terminus, is a historic railway station known for its stunning Victorian-Gothic architecture.",
+            image: "cst-mumbai.jpg",
+            openingTime: "Open 24 Hours (for train services)",
+            closingTime: "Open 24 Hours (for train services)",
+        },
+        {
+            day: "Day 3",
+            name: "Haji Ali Dargah",
+            description: "Haji Ali Dargah is a mosque and tomb located on an islet off the coast of Worli. It's a serene and picturesque place of worship.",
+            image: "haji-ali.jpg",
+            openingTime: "5:30 AM",
+            closingTime: "10:00 PM",
+        },
+        {
+            day: "Day 3",
+            name: "Siddhivinayak Temple",
+            description: "Siddhivinayak Temple is a revered Hindu temple dedicated to Lord Ganesha. It's known for its spiritual significance and architecture.",
+            image: "siddhivinayak-temple.jpg",
+            openingTime: "5:30 AM",
+            closingTime: "9:50 PM",
+        },
+        {
+            day: "Day 4",
+            name: "Bandra-Worli Sea Link",
+            description: "The Bandra-Worli Sea Link is a cable-stayed bridge that spans the Mahim Bay. It offers scenic views of the city and is an engineering marvel.",
+            image: "bandra-worli-sea-link.jpg",
+            openingTime: "Open 24 Hours",
+            closingTime: "Open 24 Hours",
+        },
+        {
+            day: "Day 4",
+            name: "Sanjay Gandhi National Park",
+            description: "Sanjay Gandhi National Park is a lush green escape within Mumbai, known for its biodiversity, hiking trails, and the Kanheri Caves.",
+            image: "sanjay-gandhi-national-park.jpg",
+            openingTime: "7:30 AM",
+            closingTime: "6:30 PM",
+        },
+    ],
+    jaipur: [
+        {
+            day: "Day 1",
+            name: "Hawa Mahal",
+            description: "Hawa Mahal, or the Palace of the Winds, is a unique five-story pink sandstone structure with intricate windows. It was built for royal women to observe street festivals without being seen.",
+            image: "hawa-mahal.jpg",
+            openingTime: "9:00 AM",
+            closingTime: "4:30 PM",
+        },
+        {
+            day: "Day 1",
+            name: "City Palace",
+            description: "City Palace is a royal residence with a museum showcasing art, textiles, and historical artifacts. It also includes the Mubarak Mahal and Chandra Mahal.",
+            image: "city-palace-jaipur.jpg",
+            openingTime: "9:30 AM",
+            closingTime: "5:30 PM",
+        },
+        {
+            day: "Day 2",
+            name: "Amber Fort",
+            description: "Amber Fort is a majestic palace complex located on a hilltop. It showcases impressive architecture, courtyards, and stunning views of the surrounding area.",
+            image: "amber-fort.jpg",
+            openingTime: "8:00 AM",
+            closingTime: "5:30 PM",
+        },
+        {
+            day: "Day 2",
+            name: "Jal Mahal",
+            description: "Jal Mahal, or the Water Palace, is a stunning palace situated in the middle of the Man Sagar Lake. It's an architectural marvel and a popular photography spot.",
+            image: "jal-mahal.jpg",
+            openingTime: "Open for viewing from the banks",
+            closingTime: "Open for viewing from the banks",
+        },
+        {
+            day: "Day 3",
+            name: "Jantar Mantar",
+            description: "Jantar Mantar is an astronomical observatory with a collection of architectural astronomical instruments. It's a UNESCO World Heritage Site.",
+            image: "jantar-mantar.jpg",
+            openingTime: "9:00 AM",
+            closingTime: "4:30 PM",
+        },
+        {
+            day: "Day 3",
+            name: "Albert Hall Museum",
+            description: "Albert Hall Museum is the oldest museum in Rajasthan, housing a vast collection of artifacts, including sculptures, paintings, and decorative art.",
+            image: "albert-hall-museum.jpg",
+            openingTime: "10:00 AM",
+            closingTime: "5:00 PM",
+        },
+        {
+            day: "Day 4",
+            name: "Nahargarh Fort",
+            description: "Nahargarh Fort is situated on the Aravalli hills and offers panoramic views of Jaipur. It's known for its historical significance and architecture.",
+            image: "nahargarh-fort.jpg",
+            openingTime: "10:00 AM",
+            closingTime: "5:30 PM",
+        },
+        {
+            day: "Day 4",
+            name: "Jaigarh Fort",
+            description: "Jaigarh Fort is a massive fort that houses the world's largest cannon, Jaivana. It's known for its impressive battlements and structures.",
+            image: "jaigarh-fort.jpg",
+            openingTime: "9:00 AM",
+            closingTime: "4:30 PM",
+        },
+        {
+            day: "Day 5",
+            name: "Birla Mandir",
+            description: "Birla Mandir, also known as Laxmi Narayan Temple, is a modern Hindu temple made of white marble. It's dedicated to Lord Vishnu and Goddess Lakshmi.",
+            image: "birla-mandir.jpg",
+            openingTime: "6:00 AM",
+            closingTime: "12:00 PM, 3:00 PM - 9:00 PM",
+        },
+        {
+            day: "Day 5",
+            name: "Sisodia Rani Garden",
+            description: "Sisodia Rani Garden is a royal garden with fountains, pavilions, and lush greenery. It's a peaceful escape from the city's hustle and bustle.",
+            image: "sisodia-rani-garden.jpg",
+            openingTime: "8:00 AM",
+            closingTime: "5:30 PM",
+        },
+    ],
+  
+    goa: [
+        {
+            day: "Day 1",
+            name: "Baga Beach",
+            description: "Baga Beach is a popular and lively beach destination known for water sports, nightlife, and a variety of restaurants and shacks.",
+            image: "baga-beach.jpg",
+            openingTime: "Open 24 Hours",
+            closingTime: "Open 24 Hours",
+        },
+        {
+            day: "Day 1",
+            name: "Calangute Beach",
+            description: "Calangute Beach is one of the most famous beaches in Goa, offering water sports, shopping, and a vibrant atmosphere.",
+            image: "calangute-beach.jpg",
+            openingTime: "Open 24 Hours",
+            closingTime: "Open 24 Hours",
+        },
+        {
+            day: "Day 2",
+            name: "Dudhsagar Waterfalls",
+            description: "Dudhsagar Waterfalls is a stunning cascade of water located in the tropical forests of Goa. It's a serene and beautiful natural attraction.",
+            image: "dudhsagar-waterfalls.jpg",
+            openingTime: "6:00 AM",
+            closingTime: "6:00 PM",
+        },
+        {
+            day: "Day 2",
+            name: "Bhagwan Mahavir Wildlife Sanctuary",
+            description: "Bhagwan Mahavir Wildlife Sanctuary is home to diverse flora and fauna, including leopards, deer, and various bird species. It offers trekking opportunities.",
+            image: "bhagwan-mahavir-wildlife-sanctuary.jpg",
+            openingTime: "8:00 AM",
+            closingTime: "5:30 PM",
+        },
+        {
+            day: "Day 3",
+            name: "Anjuna Flea Market",
+            description: "Anjuna Flea Market is a vibrant market where you can shop for clothing, jewelry, handicrafts, and enjoy local Goan cuisine.",
+            image: "anjuna-flea-market.jpg",
+            openingTime: "8:00 AM",
+            closingTime: "8:00 PM",
+        },
+        {
+            day: "Day 3",
+            name: "Aguada Fort",
+            description: "Aguada Fort is a well-preserved 17th-century Portuguese fort known for its impressive architecture and panoramic views of the Arabian Sea.",
+            image: "aguada-fort.jpg",
+            openingTime: "9:30 AM",
+            closingTime: "6:00 PM",
+        },
+        {
+            day: "Day 4",
+            name: "Candolim Beach",
+            description: "Candolim Beach is a peaceful and less crowded beach in North Goa, perfect for relaxing and enjoying water sports.",
+            image: "candolim-beach.jpg",
+            openingTime: "Open 24 Hours",
+            closingTime: "Open 24 Hours",
+        },
+        {
+            day: "Day 4",
+            name: "St. Cajetan Church",
+            description: "St. Cajetan Church is a beautiful church with an elegant, white façade. It's known for its serene ambiance and Baroque architecture.",
+            image: "st-cajetan-church.jpg",
+            openingTime: "7:00 AM",
+            closingTime: "6:30 PM",
+        },
+        {
+            day: "Day 5",
+            name: "Palolem Beach",
+            description: "Palolem Beach is a stunning crescent-shaped beach surrounded by palm trees. It's a popular spot for swimming and relaxing.",
+            image: "palolem-beach.jpg",
+            openingTime: "Open 24 Hours",
+            closingTime: "Open 24 Hours",
+        },
+        {
+            day: "Day 5",
+            name: "Dolphin Watching",
+            description: "Dolphin watching tours are available in Goa, offering the opportunity to spot playful dolphins in their natural habitat.",
+            image: "dolphin-watching.jpg",
+            openingTime: "Varies by tour",
+            closingTime: "Varies by tour",
+        },
+    ],
+
+    kolkata: [
+        {
+            day: "Day 1",
+            name: "Victoria Memorial",
+            description: "Victoria Memorial is a majestic marble building dedicated to Queen Victoria. It houses a museum with a vast collection of art and historical artifacts.",
+            image: "victoria-memorial.jpg",
+            openingTime: "10:00 AM",
+            closingTime: "5:00 PM",
+        },
+        {
+            day: "Day 1",
+            name: "Indian Museum",
+            description: "The Indian Museum is one of the oldest museums in India and houses an extensive collection of art, archaeology, and natural history exhibits.",
+            image: "indian-museum.jpg",
+            openingTime: "10:00 AM",
+            closingTime: "5:00 PM",
+        },
+        {
+            day: "Day 2",
+            name: "Howrah Bridge",
+            description: "Howrah Bridge is an iconic cantilever bridge that spans the Hooghly River. It's a landmark of Kolkata and a busy thoroughfare for commuters.",
+            image: "howrah-bridge.jpg",
+            openingTime: "Open 24 Hours",
+            closingTime: "Open 24 Hours",
+        },
+        {
+            day: "Day 2",
+            name: "Dakshineswar Kali Temple",
+            description: "Dakshineswar Kali Temple is a Hindu temple dedicated to Goddess Kali. It's known for its serene surroundings and spiritual significance.",
+            image: "dakshineswar-kali-temple.jpg",
+            openingTime: "6:00 AM",
+            closingTime: "12:30 PM, 3:00 PM - 8:30 PM",
+        },
+        {
+            day: "Day 3",
+            name: "Science City",
+            description: "Science City is a dynamic science center with interactive exhibits, a planetarium, and a space theater, making it an educational and fun destination.",
+            image: "science-city.jpg",
+            openingTime: "9:00 AM",
+            closingTime: "8:00 PM",
+        },
+        {
+            day: "Day 3",
+            name: "Nehru Children's Museum",
+            description: "Nehru Children's Museum is an engaging museum with exhibits aimed at children, featuring science, technology, and art displays.",
+            image: "nehru-childrens-museum.jpg",
+            openingTime: "11:30 AM",
+            closingTime: "6:30 PM",
+        },
+        {
+            day: "Day 4",
+            name: "Botanical Gardens",
+            description: "Botanical Gardens, also known as the Acharya Jagadish Chandra Bose Indian Botanic Garden, is a lush and historic garden with a vast collection of plants and the Great Banyan Tree.",
+            image: "botanical-gardens.jpg",
+            openingTime: "8:00 AM",
+            closingTime: "6:00 PM",
+        },
+        {
+            day: "Day 4",
+            name: "Belur Math",
+            description: "Belur Math is a place of worship and headquarters of the Ramakrishna Math and Ramakrishna Mission. It's known for its serene environment and the harmony of religions.",
+            image: "belur-math.jpg",
+            openingTime: "6:00 AM",
+            closingTime: "11:30 AM, 4:00 PM - 6:30 PM",
+        },
+        {
+            day: "Day 5",
+            name: "Kali Ghat Temple",
+            description: "Kali Ghat Temple, also known as Kalighat, is one of the most famous temples dedicated to Goddess Kali. It's a place of pilgrimage and devotion.",
+            image: "kali-ghat-temple.jpg",
+            openingTime: "5:00 AM",
+            closingTime: "2:00 PM, 5:00 PM - 10:30 PM",
+        },
+        {
+            day: "Day 5",
+            name: "South Park Street Cemetery",
+            description: "South Park Street Cemetery is a historic burial ground dating back to the 18th century, featuring grand tombs and a peaceful ambiance.",
+            image: "south-park-street-cemetery.jpg",
+            openingTime: "8:00 AM",
+            closingTime: "5:30 PM",
+        },
+    ],
+    chennai: [
+        {
+            day: "Day 1",
+            name: "Marina Beach",
+            description: "Marina Beach is one of the longest urban beaches in the world. It's a popular spot for relaxing, taking a stroll, and enjoying the sea breeze.",
+            image: "marina-beach.jpg",
+            openingTime: "Open 24 Hours",
+            closingTime: "Open 24 Hours",
+        },
+        {
+            day: "Day 1",
+            name: "Kapaleeshwarar Temple",
+            description: "Kapaleeshwarar Temple is a historic Hindu temple dedicated to Lord Shiva. It features Dravidian architecture and intricate sculptures.",
+            image: "kapaleeshwarar-temple.jpg",
+            openingTime: "5:30 AM",
+            closingTime: "12:00 PM, 4:00 PM - 9:00 PM",
+        },
+        {
+            day: "Day 2",
+            name: "Fort St. George",
+            description: "Fort St. George is a historic fort built by the British East India Company. It houses the Tamil Nadu Legislative Assembly and a museum.",
+            image: "fort-st-george.jpg",
+            openingTime: "9:00 AM",
+            closingTime: "5:00 PM",
+        },
+        {
+            day: "Day 2",
+            name: "Government Museum",
+            description: "Government Museum is one of the oldest museums in India, with a vast collection of art, archaeology, and historical artifacts.",
+            image: "government-museum.jpg",
+            openingTime: "9:30 AM",
+            closingTime: "5:00 PM",
+        },
+        {
+            day: "Day 3",
+            name: "San Thome Basilica",
+            description: "San Thome Basilica is a Catholic basilica built over the tomb of St. Thomas the Apostle. It's an architectural and religious landmark.",
+            image: "san-thome-basilica.jpg",
+            openingTime: "5:30 AM",
+            closingTime: "9:00 PM",
+        },
+        {
+            day: "Day 3",
+            name: "Elliots Beach",
+            description: "Elliots Beach, also known as Besant Nagar Beach, is a serene and less crowded beach offering a peaceful environment for relaxation.",
+            image: "elliots-beach.jpg",
+            openingTime: "Open 24 Hours",
+            closingTime: "Open 24 Hours",
+        },
+        {
+            day: "Day 4",
+            name: "Guindy National Park",
+            description: "Guindy National Park is a protected area within the city, known for its biodiversity, birdwatching, and a snake park.",
+            image: "guindy-national-park.jpg",
+            openingTime: "9:00 AM",
+            closingTime: "5:30 PM",
+        },
+        {
+            day: "Day 4",
+            name: "Arignar Anna Zoological Park",
+            description: "Arignar Anna Zoological Park is one of the largest zoos in South Asia, featuring a wide variety of animal species and a safari park.",
+            image: "anna-zoological-park.jpg",
+            openingTime: "9:00 AM",
+            closingTime: "5:30 PM",
+        },
+        {
+            day: "Day 5",
+            name: "Vivekananda House",
+            description: "Vivekananda House, also known as Ice House, is where Swami Vivekananda stayed during his visit to Chennai. It's a place of historical significance.",
+            image: "vivekananda-house.jpg",
+            openingTime: "10:00 AM",
+            closingTime: "7:00 PM",
+        },
+        {
+            day: "Day 5",
+            name: "Marundeeswarar Temple",
+            description: "Marundeeswarar Temple is a Hindu temple dedicated to Lord Shiva, known for its architectural beauty and spiritual significance.",
+            image: "marundeeswarar-temple.jpg",
+            openingTime: "6:00 AM",
+            closingTime: "1:00 PM, 4:00 PM - 8:00 PM",
+        },
+    ],
+   
+    kerala: [
+        {
+            day: "Day 1",
+            name: "Fort Kochi",
+            description: "Fort Kochi is a historic area known for its European colonial architecture, art galleries, and the famous Chinese fishing nets.",
+            image: "fort-kochi.jpg",
+            openingTime: "Open 24 Hours",
+            closingTime: "Open 24 Hours",
+        },
+        {
+            day: "Day 1",
+            name: "St. Francis Church",
+            description: "St. Francis Church is one of the oldest European churches in India. It's known for its historical significance and serene ambiance.",
+            image: "st-francis-church.jpg",
+            openingTime: "7:00 AM",
+            closingTime: "6:30 PM",
+        },
+        {
+            day: "Day 2",
+            name: "Backwater Houseboat Cruise",
+            description: "Experience the serene backwaters of Kerala with a houseboat cruise, offering scenic views of lush landscapes and traditional village life.",
+            image: "kerala-houseboat.jpg",
+            openingTime: "Depends on the cruise schedule",
+            closingTime: "Depends on the cruise schedule",
+        },
+        {
+            day: "Day 2",
+            name: "Kumarakom Bird Sanctuary",
+            description: "Kumarakom Bird Sanctuary is a haven for birdwatchers, with various bird species and picturesque settings along the Vembanad Lake.",
+            image: "kumarakom-bird-sanctuary.jpg",
+            openingTime: "6:30 AM",
+            closingTime: "5:00 PM",
+        },
+        {
+            day: "Day 3",
+            name: "Munnar Tea Gardens",
+            description: "Munnar is renowned for its lush tea gardens. Visit a tea plantation to learn about tea production and enjoy the stunning landscapes.",
+            image: "munnar-tea-gardens.jpg",
+            openingTime: "Varies by plantation",
+            closingTime: "Varies by plantation",
+        },
+        {
+            day: "Day 3",
+            name: "Eravikulam National Park",
+            description: "Eravikulam National Park is home to the Nilgiri Tahr, a rare mountain goat species. It offers trekking trails and beautiful vistas.",
+            image: "eravikulam-national-park.jpg",
+            openingTime: "7:30 AM",
+            closingTime: "4:00 PM",
+        },
+        {
+            day: "Day 4",
+            name: "Periyar Wildlife Sanctuary",
+            description: "Periyar Wildlife Sanctuary is a haven for wildlife enthusiasts. Enjoy a boat ride on the Periyar Lake to spot animals in their natural habitat.",
+            image: "periyar-wildlife-sanctuary.jpg",
+            openingTime: "6:00 AM",
+            closingTime: "3:30 PM",
+        },
+        {
+            day: "Day 4",
+            name: "Thekkady Spice Gardens",
+            description: "Explore spice plantations in Thekkady, where you can learn about various spices and their cultivation in Kerala.",
+            image: "thekkady-spice-gardens.jpg",
+            openingTime: "Varies by garden",
+            closingTime: "Varies by garden",
+        },
+        {
+            day: "Day 5",
+            name: "Kovalam Beach",
+            description: "Kovalam Beach is a popular coastal destination with golden sands and clear waters. Relax, swim, or try water sports here.",
+            image: "kovalam-beach.jpg",
+            openingTime: "Open 24 Hours",
+            closingTime: "Open 24 Hours",
+        },
+        {
+            day: "Day 5",
+            name: "Padmanabhaswamy Temple",
+            description: "Padmanabhaswamy Temple is a significant Hindu temple known for its Dravidian architecture and spiritual importance.",
+            image: "padmanabhaswamy-temple.jpg",
+            openingTime: "3:30 AM",
+            closingTime: "7:20 PM",
+        },
+    ],
+    kashmir: [
+        {
+            day: "Day 1",
+            name: "Dal Lake",
+            description: "Dal Lake is a stunning, serene lake surrounded by the Himalayas. Enjoy a Shikara ride, explore the floating gardens, and experience the vibrant local culture.",
+            image: "dal-lake.jpg",
+            openingTime: "7:00 AM",
+            closingTime: "6:00 PM",
+        },
+        {
+            day: "Day 1",
+            name: "Shalimar Bagh",
+            description: "Shalimar Bagh is a historic Mughal garden known for its terraced layout, fountains, and beautiful floral displays.",
+            image: "shalimar-bagh.jpg",
+            openingTime: "9:00 AM",
+            closingTime: "6:00 PM",
+        },
+        {
+            day: "Day 2",
+            name: "Gulmarg",
+            description: "Gulmarg is a popular hill station known for its scenic beauty and opportunities for skiing and golf. Take the Gondola ride for breathtaking views.",
+            image: "gulmarg.jpg",
+            openingTime: "9:00 AM",
+            closingTime: "4:00 PM",
+        },
+        {
+            day: "Day 2",
+            name: "Gulmarg Gondola",
+            description: "The Gulmarg Gondola is one of the world's highest cable cars. It offers panoramic views of the surrounding mountains and meadows.",
+            image: "gulmarg-gondola.jpg",
+            openingTime: "10:00 AM",
+            closingTime: "5:00 PM",
+        },
+        {
+            day: "Day 3",
+            name: "Pahalgam",
+            description: "Pahalgam is a picturesque town known for its lush green landscapes and the Lidder River. It's an ideal spot for trekking and horse riding.",
+            image: "pahalgam.jpg",
+            openingTime: "Open 24 Hours",
+            closingTime: "Open 24 Hours",
+        },
+        {
+            day: "Day 3",
+            name: "Aru Valley",
+            description: "Aru Valley is a beautiful valley surrounded by mountains and lush meadows. It's a peaceful destination for nature lovers.",
+            image: "aru-valley.jpg",
+            openingTime: "Open 24 Hours",
+            closingTime: "Open 24 Hours",
+        },
+        {
+            day: "Day 4",
+            name: "Sonamarg",
+            description: "Sonamarg, or 'Meadow of Gold,' is a stunning valley surrounded by snow-capped peaks. It's a base for various trekking and camping expeditions.",
+            image: "sonamarg.jpg",
+            openingTime: "Open 24 Hours",
+            closingTime: "Open 24 Hours",
+        },
+        {
+            day: "Day 4",
+            name: "Thajiwas Glacier",
+            description: "Thajiwas Glacier is a glacier near Sonamarg, offering an opportunity for a short trek and stunning views of the surrounding mountains.",
+            image: "thajiwas-glacier.jpg",
+            openingTime: "8:00 AM",
+            closingTime: "6:00 PM",
+        },
+        {
+            day: "Day 5",
+            name: "Mughal Road",
+            description: "The Mughal Road is an ancient road that once connected Srinagar to Poonch and Rajouri. Drive along this historical route to explore picturesque villages and landscapes.",
+            image: "mughal-road.jpg",
+            openingTime: "Open 24 Hours",
+            closingTime: "Open 24 Hours",
+        },
+        {
+            day: "Day 5",
+            name: "Jama Masjid, Srinagar",
+            description: "Jama Masjid is a historic mosque in Srinagar known for its Indo-Saracenic architecture. It's a peaceful place of worship.",
+            image: "jama-masjid-srinagar.jpg",
+            openingTime: "9:00 AM",
+            closingTime: "8:00 PM",
+        },
+    ],
+
+
+        };
+
+        function generateItinerary() {
+            const destination = document.getElementById("destination").value;
+            const itineraryContainer = document.getElementById("itinerary");
+            const attractions = attractionsData[destination];
+
+            if (attractions) {
+                itineraryContainer.innerHTML = "";
+
+                attractions.forEach((attraction) => {
+                    const attractionCard = document.createElement("div");
+                    attractionCard.classList.add("attraction-card");
+                    attractionCard.innerHTML = `
+                        
+                        <h2>${attraction.day}</h2>
+                        <h3>${attraction.name}</h3>
+                        <p>${attraction.description}</p>
+                        <img src="${attraction.image}" alt="${attraction.name}">
+                    `;
+                    itineraryContainer.appendChild(attractionCard);
+                });
+            }
+        }
+    </script>
+</body>
+</html>

@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="home_style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Arimo:ital@1&family=Pixelify+Sans&family=Ubuntu&family=Varela+Round&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
@@ -14,18 +15,21 @@
     <nav class="navbar">
         <div class="left-menu">
             <ul>
-                <li><i class="fa-regular fa-heart"></i><span id="nav-head">About</span><a href="#"><span>Start Here</span></a></li>
+                <li><i class="fa-regular fa-heart"></i><span id="nav-head">About</span><a href="home_pr.htm"><span>Start Here</span></a></li>
                 <li><i class="fa-solid fa-globe"></i> <span id="nav-head">Destinations </span><a href="#"><span>Explore</span></a></li>
                 <li><i class="fa-solid fa-suitcase"></i><span id="nav-head">Categories</span><a href="categories.html"><span>Attributes</span></a></li>
             </ul>
         </div>
         <div class="logo-container">
-            Logo
+          
+            <a href="itineryPlanner.html" class="link">Plan An Itinerary</a> <span class="badge text-bg-secondary">New</span>
+
         </div>
         <div class="right-menu">
             <ul>
                 <li><i class="fa-solid fa-gift"></i><span id="nav-head">Resources</span><a href="#"><span>Something Exciting</span></a></li>
-                <li><i class="fa-solid fa-user-plus"></i><span id="nav-head-signin"><a href="blog_post.html">Sign In</a></span></li>
+                <li><i class="fa-regular fa-pen-to-square"></i><span id="nav-head-signin"><a href="blog_post.html">Post A Blog</a></span></li>
+                <li><i class="fa-solid fa-user-plus"></i><span id="nav-head-signin"><a href="">Sign In</a></span></li>
             </ul>
         </div>
     </nav>
@@ -35,7 +39,7 @@
     <div class="main">
     <div class="line-divider"></div>
     <div class="content">
-        <h1> About Us </h1>
+        <h1 style="color: #C3073F;"> About Us </h1>
         <p>At ManzilMate, we're passionate about making your travel experiences unforgettable. Whether you're a globetrotter, a casual traveler, or someone planning their dream getaway, we're here to inspire, assist, and enrich your journeys. <br><br>
 
             Our mission is simple: to provide you with a one-stop platform for all your travel needs. From awe-inspiring destination guides and insightful travel blogs to handpicked hotel and restaurant recommendations, we've got you covered. Explore the world with confidence, access valuable resources, and find the best deals—all in one place. <br><br>
@@ -49,26 +53,17 @@
 
     <div class="line-divider"></div>
     <div class="content">
-     <h1>Why ManzilMate?</h1>
+     <h1 style="color: #C3073F;">Why ManzilMate?</h1>
      <p>We're not just another travel website; we're your passport to extraordinary journeys. With a passionate team and a commitment to making every trip memorable, we stand out as your trusted travel partner. We simplify the complex, inspire your wanderlust, and ensure that every adventure, whether big or small, is filled with unforgettable moments. </p>
-        
     <p style="font-style: italic;">Choose ManzilMate because travel isn't just a destination; it's an experience, and we're here to make it extraordinary.</p>
     </div>
-
-    <div class="line-divider"></div>
-    <div class="content">
-     <h1>Our Team</h1>
-    <p> Probably this section can be used for video presentation of our website. <br><br>
-        Or we can attach our photos. <br><br>
-        Or the social media handles(Insta, fb, linkedIn, Twitter).</p>
-    </div>
-    </div>
-
+   
     <div class="footer">
      <p>Privacy Policy | Copyright © 2023 ManzilMate</p>
     </div>
     <script>
-        let title = document.querySelector('.heading');
+                
+                let title = document.querySelector('.heading');
         let name = "Welcome to ManzilMate : The Ultimate Travel Companion";
         let i=1;
         let ch = '|';
@@ -80,7 +75,7 @@
         i >= name.length ? i = 1 : i++;
         setTimeout(() => 
             typeWriter()
-        , 250);
+        , 150);
     
         }
         typeWriter();

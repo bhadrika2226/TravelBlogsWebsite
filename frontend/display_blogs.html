@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Display Blog Posts</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url(pr_bg.png);
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            background: white;
+            width: 80%;
+            margin: 20px auto;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #950740;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+        li {
+            border: 1px solid #ccc;
+            margin: 10px;
+            padding: 10px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        img {
+            max-width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Blog Posts</h1>
+        <ul>
+            <% blogs.forEach(blog => { %>
+                <li>
+                    <h2><%= blog.title %></h2>
+                    <p>Date: <%= blog.d ? blog.d.toDateString() : 'N/A' %></p>
+                    <p>State: <%= blog.state %></p>
+                    <p>City: <%= blog.city %></p>
+                    <p>Description: <%= blog.description %></p>
+                    <img src="<%= blog.image %>" alt="<%= blog.title %>" />
+                </li>
+            <% }); %>
+        </ul>
+    </div>
+</body>
+</html>

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="quotes_style.css">
+    <title>Travel Quotes</title>
+    <style>
+        body {
+            background-image: url(pr_bg.png);
+            font-family: Arial, sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            color: whitesmoke;
+            margin: 0;
+        }
+
+        .quote-container {
+            background-color: #950740;
+            border-radius: 10px;
+            box-shadow: 0 2px 6px #6F2232;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .quote {
+            margin: 20px 0;
+            animation: fadeIn 2s ease both;
+        }
+
+        .quote:nth-child(odd) {
+            animation: fadeInFromRight 2s ease both;
+        }
+
+        .quote q {
+            font-size: 24px;
+            font-style: italic;
+        }
+
+        .author {
+            font-size: 16px;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInFromRight {
+            from {
+                opacity: 0;
+                transform: translateX(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="quote-container">
+        <div class="quote">
+            <q>Adventure is worthwhile in itself.</q>
+            <p class="author">- Amelia Earhart</p>
+        </div>
+        <div class="quote">
+            <q>The journey of a thousand miles begins with a single step.</q>
+            <p class="author">- Lao Tzu</p>
+        </div>
+        <div class="quote">
+            <q>Travel makes one modest. You see what a tiny place you occupy in the world.</q>
+            <p class="author">- Gustave Flaubert</p>
+        </div>
+        <div class="quote">
+            <q>Travel far enough, you meet yourself.</q>
+            <p class="author">- David Mitchell</p>
+        </div>
+        <div class="quote">
+            <q>Adventure is the best way to learn.</q>
+            <p class="author">- Lao Tzu</p>
+        </div>
+        <div class="quote">
+            <q>Travel is the only thing you can buy that makes you richer.</q>
+            <p class="author">- Anonymous</p>
+        </div>
+        <div class="quote">
+            <q>Life begins at the end of your comfort zone.</q>
+            <p class="author">- Neale Donald Walsch</p>
+        </div>
+        <div class="quote">
+            <q>The world is a book, and those who do not travel read only one page.</q>
+            <p class="author">- Augustine of Hippo</p>
+        </div>
+        <div class="quote">
+            <q>Traveling leaves you speechless, then turns you into a storyteller.</q>
+            <p class="author">- Ibn Battuta</p>
+        </div>
+        <div class="quote">
+            <q>Adventure may hurt you, but monotony will kill you.</q>
+            <p class="author">- Ghaniya Nadar</p>
+        </div>
+        <div class="quote">
+            <q>To travel is to live.</q>
+            <p class="author">- Hans Christian Andersen</p>
+        </div>
+        <div class="quote">
+            <q>The journey not the arrival matters.</q>
+            <p class="author">- T.S. Eliot</p>
+        </div>
+        <div class="quote">
+            <q>Adventure is out there!</q>
+            <p class="author">- Up (Disney Pixar)</p>
+        </div>
+        <div class="quote">
+            <q>Traveling tends to magnify all human emotions.</q>
+            <p class="author">- Peter Hoeg</p>
+        </div>
+        <div class="quote">
+            <q>The biggest adventure you can take is to live the life of your dreams.</q>
+            <p class="author">- Oprah Winfrey</p>
+        </div>
+        
+    </div>
+</body>
+</html>
